@@ -56,9 +56,9 @@ async function cargarConfirmacionesRemotas() {
   }
 }
 
-function crearLinkPerfil(id) {
-  // Ahora el link lleva directo a index.html
-  return `index.html?invitado=${encodeURIComponent(id)}`;
+function crearLinkPerfil(inv) {
+  // Pasa los datos por URL para que el celular del invitado sepa su nombre sin descargar datos locales
+  return `index.html?invitado=${encodeURIComponent(inv.id)}&n=${encodeURIComponent(inv.nombre)}&p=${inv.pases}&t=${encodeURIComponent(inv.tipo)}`;
 }
 
 function copiar(texto) {
@@ -77,7 +77,7 @@ function renderInvitados() {
   }
 
   guestListEl.innerHTML = invitados.map((inv) => {
-    const link = crearLinkPerfil(inv.id);
+    const link = crearLinkPerfil(inv);
     const fullLink = window.location.origin + window.location.pathname.replace('admin.html', '') + link;
     
     // Evaluar estado RSVP convirtiendo ambos a string para evitar errores por tipos de datos
@@ -122,38 +122,7 @@ function renderInvitados() {
   });
 }
 
-function exportarAExcel() {
-  const confirmaciones = confirmacionesLocales();
-  const invitados = invitadosLocales().map(i => {
-    const link = window.location.origin + window.location.pathname.replace('admin.html', '') + `index.html?invitado=${i.id}`;
-    
-    let estadoPlano = 'Sin confirmar';
-    const rsvp = confirmaciones.find(c => String(c.invitadoId) === String(i.id));
-    if(rsvp) {
-        if(rsvp.estado === 'si_asistire') estadoPlano = 'Confirmó';
-        else estadoPlano = 'No asistirá';
-    }
 
-    return {
-      "ID Único": i.id,
-      "Nombre Invitado": i.nombre,
-      "Pases": i.pases,
-      "Tipo": i.tipo,
-      "Estado RSVP": estadoPlano,
-      "Link de Invitación (WhatsApp)": link
-    }
-  });
-
-  if (!invitados.length) {
-    alert("No hay invitados guardados para exportar.");
-    return;
-  }
-
-  const ws = XLSX.utils.json_to_sheet(invitados);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Mis Invitados Boda");
-  XLSX.writeFile(wb, "Lista_Invitados_Boda.xlsx");
-}
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -184,9 +153,7 @@ form.addEventListener('submit', (event) => {
   renderInvitados();
 });
 
-if(btnExport) {
-    btnExport.addEventListener('click', exportarAExcel);
-}
+
 
 // Inicializar y renderizar (sincronizando backend si existe)
 async function inicializarAdmin() {

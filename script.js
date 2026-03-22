@@ -1,5 +1,8 @@
 const params = new URLSearchParams(window.location.search);
 const invitadoId = params.get('invitado') || params.get('id') || 'general';
+const nombreViaURL = params.get('n');
+const pasesViaURL = params.get('p');
+const tipoViaURL = params.get('t');
 
 const STORAGE_RSVP_KEY = 'boda_rsvp_confirmaciones';
 const STORAGE_GUESTS_KEY = 'boda_invitados_locales';
@@ -306,7 +309,19 @@ function initCountdown() {
 
 async function init() {
     const invitados = await cargarInvitados();
-    invitadoActual = invitados.find((i) => i.id === invitadoId) || invitadoActual;
+    let encontrado = invitados.find((i) => i.id === invitadoId);
+    
+    // Si el invitado no está localmente pero sus datos vienen por la URL (generado por el Admin)
+    if (!encontrado && nombreViaURL) {
+        encontrado = {
+            id: invitadoId !== 'general' ? invitadoId : ('inv' + Date.now()),
+            nombre: nombreViaURL,
+            pases: Number(pasesViaURL) || 1,
+            tipo: tipoViaURL || 'familia'
+        };
+    }
+    
+    invitadoActual = encontrado || invitadoActual;
     const config = obtenerConfig();
 
     mostrarInvitado(invitadoActual);
