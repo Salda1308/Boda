@@ -27,6 +27,35 @@ function guardarInvitados(arr) {
   localStorage.setItem(STORAGE_GUESTS_KEY, JSON.stringify(arr));
 }
 
+function guardarConfirmacionesLocales(arr) {
+  localStorage.setItem(STORAGE_RSVP_KEY, JSON.stringify(arr));
+}
+
+async function cargarConfirmacionesRemotas() {
+  if (window.BODA_CONFIG && window.BODA_CONFIG.rsvpEndpoint) {
+    try {
+      if(statusEl) statusEl.innerText = "Sincronizando RSVPs...";
+      const res = await fetch(window.BODA_CONFIG.rsvpEndpoint);
+      if (res.ok) {
+        const remotas = await res.json();
+        if (Array.isArray(remotas)) {
+          const locales = confirmacionesLocales();
+          const mapa = new Map();
+          // Dar prioridad a lo remoto
+          locales.forEach(c => mapa.set(c.invitadoId, c));
+          remotas.forEach(c => mapa.set(c.invitadoId, c));
+          guardarConfirmacionesLocales([...mapa.values()]);
+        }
+        if(statusEl) statusEl.innerText = "Sincronizado correctamente.";
+        setTimeout(() => { if (statusEl && statusEl.innerText === 'Sincronizado correctamente.') statusEl.innerText = ''; }, 3000);
+      }
+    } catch(e) {
+      console.error("Error sincronizando:", e);
+      if(statusEl) statusEl.innerText = "Usando datos locales (Error de conexión).";
+    }
+  }
+}
+
 function crearLinkPerfil(id) {
   // Ahora el link lleva directo a index.html
   return `index.html?invitado=${encodeURIComponent(id)}`;
@@ -159,7 +188,12 @@ if(btnExport) {
     btnExport.addEventListener('click', exportarAExcel);
 }
 
-renderInvitados();
+// Inicializar y renderizar (sincronizando backend si existe)
+async function inicializarAdmin() {
+  await cargarConfirmacionesRemotas();
+  renderInvitados();
+}
+inicializarAdmin();
 
 // Basic Frontend Auth
 function checkLogin() {

@@ -93,7 +93,7 @@ function inicializarRSVP() {
         return;
     }
 
-    const manejarClick = (estado) => {
+    const manejarClick = async (estado) => {
         const registro = {
             invitadoId: invitadoActual.id,
             nombre: invitadoActual.nombre,
@@ -104,9 +104,34 @@ function inicializarRSVP() {
             fuente: 'github-pages'
         };
         guardarConfirmacionLocal(registro);
-        actualizarEstadoRSVP('Gracias por confirmar. Tu respuesta fue guardada.');
-        btnSi.disabled = true; btnNo.disabled = true;
-        btnSi.style.opacity = '0.5'; btnNo.style.opacity = '0.5';
+        
+        const config = obtenerConfig();
+        if (config.rsvpEndpoint) {
+            actualizarEstadoRSVP('Enviando tu respuesta...', false);
+            btnSi.disabled = true; btnNo.disabled = true;
+            btnSi.style.opacity = '0.5'; btnNo.style.opacity = '0.5';
+            
+            try {
+                // Se envía el POST a la URL de Google Apps Script. 
+                // Se usa 'no-cors' para evitar errores de preflight con POST.
+                await fetch(config.rsvpEndpoint, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(registro)
+                });
+                actualizarEstadoRSVP('¡Gracias por confirmar! Tu respuesta fue guardada remotamente.');
+            } catch (error) {
+                console.error("Error al enviar RSVP:", error);
+                actualizarEstadoRSVP('Guardado localmente. Hubo un problema conectando al servidor.', true);
+                btnSi.disabled = false; btnNo.disabled = false;
+                btnSi.style.opacity = '1'; btnNo.style.opacity = '1';
+            }
+        } else {
+            actualizarEstadoRSVP('Gracias por confirmar. Tu respuesta fue guardada localmente.');
+            btnSi.disabled = true; btnNo.disabled = true;
+            btnSi.style.opacity = '0.5'; btnNo.style.opacity = '0.5';
+        }
     };
 
     btnSi.addEventListener('click', () => manejarClick('si_asistire'));
