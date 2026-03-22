@@ -42,8 +42,8 @@ async function cargarConfirmacionesRemotas() {
           const locales = confirmacionesLocales();
           const mapa = new Map();
           // Dar prioridad a lo remoto
-          locales.forEach(c => mapa.set(c.invitadoId, c));
-          remotas.forEach(c => mapa.set(c.invitadoId, c));
+          locales.forEach(c => mapa.set(String(c.invitadoId), c));
+          remotas.forEach(c => mapa.set(String(c.invitadoId), c));
           guardarConfirmacionesLocales([...mapa.values()]);
         }
         if(statusEl) statusEl.innerText = "Sincronizado correctamente.";
@@ -80,8 +80,8 @@ function renderInvitados() {
     const link = crearLinkPerfil(inv.id);
     const fullLink = window.location.origin + window.location.pathname.replace('admin.html', '') + link;
     
-    // Evaluar estado RSVP
-    const rsvp = confirmaciones.find(c => c.invitadoId === inv.id);
+    // Evaluar estado RSVP convirtiendo ambos a string para evitar errores por tipos de datos
+    const rsvp = confirmaciones.find(c => String(c.invitadoId) === String(inv.id));
     let badge = '<span style="color: #999; border: 1px solid #777; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;">Sin confirmar</span>';
     if(rsvp) {
         if(rsvp.estado === 'si_asistire') {
@@ -128,7 +128,7 @@ function exportarAExcel() {
     const link = window.location.origin + window.location.pathname.replace('admin.html', '') + `index.html?invitado=${i.id}`;
     
     let estadoPlano = 'Sin confirmar';
-    const rsvp = confirmaciones.find(c => c.invitadoId === i.id);
+    const rsvp = confirmaciones.find(c => String(c.invitadoId) === String(i.id));
     if(rsvp) {
         if(rsvp.estado === 'si_asistire') estadoPlano = 'Confirmó';
         else estadoPlano = 'No asistirá';
