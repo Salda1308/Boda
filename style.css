@@ -1,0 +1,148 @@
+/* Base configurations are handled by Tailwind CLI or CDN in index.html */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Offset for fixed header */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+  
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background-color: #C8A97E;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out, width 0.2s ease, height 0.2s ease;
+}
+
+.custom-cursor.hover {
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    border: 2px solid #C8A97E;
+}
+
+/* Fluid Background Replication */
+.fluid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at 10% 20%, rgba(46, 79, 59, 0.45) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(200, 169, 126, 0.15) 0%, transparent 45%);
+    pointer-events: none;
+}
+
+/* Noise overlay for subtle elegance */
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.04;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+    pointer-events: none;
+}
+
+/* Glitch Text Effect */
+.text-glitch {
+    position: relative;
+    color: white;
+}
+.text-glitch::before,
+.text-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.text-glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #C8A97E;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+.text-glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #fff;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(72px, 9999px, 86px, 0); }
+    20% { clip: rect(100px, 9999px, 120px, 0); }
+    40% { clip: rect(3px, 9999px, 80px, 0); }
+    60% { clip: rect(91px, 9999px, 93px, 0); }
+    80% { clip: rect(32px, 9999px, 35px, 0); }
+    100% { clip: rect(4px, 9999px, 38px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(82px, 9999px, 100px, 0); }
+    20% { clip: rect(6px, 9999px, 14px, 0); }
+    40% { clip: rect(54px, 9999px, 70px, 0); }
+    60% { clip: rect(21px, 9999px, 31px, 0); }
+    80% { clip: rect(43px, 9999px, 60px, 0); }
+    100% { clip: rect(80px, 9999px, 99px, 0); }
+}
+
+/* Animations that substitute Framer Motion */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.line-grow {
+    transform: scaleX(0);
+    transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.line-grow.visible {
+    transform: scaleX(1);
+}
+
+.hero-blob {
+    animation: blob-float 6s infinite alternate ease-in-out;
+}
+@keyframes blob-float {
+    0% { transform: scale(0.8) translateY(0px) translateZ(0); opacity: 0.3; }
+    100% { transform: scale(1.2) translateY(-20px) translateZ(0); opacity: 0.6; }
+}
+
+.marquee-content {
+    display: inline-flex;
+    animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.event-card {
+    transition: background 0.3s ease;
+}
+.event-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+}

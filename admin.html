@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de perfiles | Boda Lilian y Jesus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <!-- Login Overlay -->
+  <div id="login-overlay" style="position:fixed; inset:0; background:var(--bg); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem;">
+    <h2 style="color:var(--accent); font-family:'Cormorant Garamond', serif; font-size:2.5rem; margin-bottom:1rem;">Acceso Restringido</h2>
+    <p style="color:var(--ink-soft); margin-bottom:2rem; text-align:center;">Ingresa la contraseña de administrador para continuar.</p>
+    <input type="password" id="admin-pass" placeholder="Contraseña" style="margin-bottom:1rem; text-align:center; max-width:300px; width:100%;">
+    <button class="btn" onclick="checkLogin()" style="width:100%; max-width:300px; background:var(--accent); color:#000;">Ingresar</button>
+    <p id="login-err" style="color:#e74c3c; margin-top:1rem; min-height:1.5rem;"></p>
+  </div>
+
+  <main class="admin-shell">
+    <header class="admin-header">
+      <p class="tag">Panel de perfiles</p>
+      <h1>Invitaciones personalizadas</h1>
+      <p>Crea perfiles en tu navegador y genera enlaces para enviarlos. Exporta tu base de datos a Excel.</p>
+      <div class="header-actions">
+        <a href="index.html">Volver a invitación</a>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Nuevo perfil</h2>
+      <form id="guest-form" class="grid-form">
+        <label>ID unico
+          <input id="guest-id" type="text" placeholder="Gomez1" required>
+        </label>
+        <label>Nombre del invitado
+          <input id="guest-name" type="text" placeholder="Familia Gomez" required>
+        </label>
+        <label>Pases
+          <input id="guest-pases" type="number" min="1" value="1" required>
+        </label>
+        <label>Tipo
+          <select id="guest-type">
+            <option value="familia">Familia</option>
+            <option value="pareja">Pareja</option>
+            <option value="individual">Individual</option>
+          </select>
+        </label>
+        <button class="btn" type="submit">Guardar perfil</button>
+      </form>
+      <p id="form-status" class="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h2>Perfiles locales</h2>
+      <div id="guest-list" class="list"></div>
+    </section>
+
+    <section class="card" style="text-align: center; padding: 2.5rem 1rem;">
+      <h2>Descargar lista de invitados</h2>
+      <p style="margin-bottom: 1.5rem;">Obtén un archivo Excel con todos los nombres y sus links directos para enviarlos fácilmente por WhatsApp.</p>
+      <button id="btn-export" class="btn" style="background-color: var(--accent); color: #000;">Exportar a Excel (.xlsx)</button>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

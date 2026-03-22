@@ -1,0 +1,16 @@
+{
+  "invitados": [
+    {
+      "id": "inv001",
+      "nombre": "Familia Perez",
+      "pases": 4,
+      "tipo": "familia"
+    },
+    {
+      "id": "inv002",
+      "nombre": "Daniela Martinez",
+      "pases": 1,
+      "tipo": "individual"
+    }
+  ]
+}

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boda Lilian & Jesús</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Syncopate:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'wedding-bg': '#1B2A22',
+            'wedding-cream': '#F4EFE6',
+            'wedding-gold': '#C8A97E',
+            'wedding-dark': '#101A14',
+            'app-bg': '#0D1410'
+          },
+          fontFamily: {
+            heading: ['Syncopate', 'sans-serif'],
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-app-bg text-white selection:bg-wedding-gold selection:text-black min-h-screen overflow-x-hidden md:cursor-none">
+  
+  <div id="custom-cursor" class="custom-cursor hidden md:block"></div>
+  <div class="fluid-bg"></div>
+  <div class="noise-overlay"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-8 py-6 mix-blend-difference">
+    <div class="font-heading text-xl md:text-2xl font-bold tracking-tighter text-white cursor-default z-50">L & J</div>
+    
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex gap-10 text-sm font-bold tracking-widest uppercase">
+      <button onclick="scrollToSection('historia')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Historia</button>
+      <button onclick="scrollToSection('cronograma')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Cronograma</button>
+      <button onclick="scrollToSection('ubicacion')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Ubicación</button>
+      <button onclick="scrollToSection('hospedaje')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Hospedaje</button>
+      <button onclick="scrollToSection('regalos')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Regalos</button>
+      <button onclick="scrollToSection('rsvp')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">RSVP</button>
+    </div>
+    <button onclick="scrollToSection('rsvp')" class="hidden md:inline-block border border-white px-8 py-3 text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 text-white cursor-pointer bg-transparent">
+      Confirmar Asistencia
+    </button>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-btn" class="md:hidden text-white z-50 relative w-10 h-10 flex items-center justify-center">
+      <svg class="w-6 h-6 icon-menu" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <svg class="w-6 h-6 icon-close hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-30 bg-[#1a1b3b]/95 backdrop-blur-xl flex-col items-center justify-center gap-8 hidden opacity-0 transition-opacity duration-300">
+    <button onclick="scrollToSection('historia')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Historia</button>
+    <button onclick="scrollToSection('cronograma')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Cronograma</button>
+    <button onclick="scrollToSection('ubicacion')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Ubicación</button>
+    <button onclick="scrollToSection('hospedaje')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Hospedaje</button>
+    <button onclick="scrollToSection('regalos')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Regalos</button>
+    <button onclick="scrollToSection('rsvp')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">RSVP</button>
+    <button onclick="scrollToSection('rsvp')" class="mt-8 border border-white px-10 py-4 text-sm font-bold tracking-widest uppercase bg-white text-black">
+      Confirmar Asistencia
+    </button>
+  </div>
+
+  <!-- HERO SECTION -->
+  <header class="relative h-[100svh] min-h-[600px] flex flex-col items-center justify-center overflow-hidden px-4">
+    <div id="hero-content" class="z-10 text-center flex flex-col items-center w-full max-w-6xl pb-24 md:pb-20 transition-transform duration-100 ease-out">
+      
+      <!-- Date / Location -->
+      <div class="reveal flex items-center gap-3 md:gap-6 text-xs md:text-base font-sans text-wedding-gold tracking-[0.2em] md:tracking-[0.3em] uppercase mb-4 bg-black/20 px-4 py-2 rounded-full backdrop-blur-sm">
+        <span>Capulálpam de Méndez, Oaxaca</span>
+        <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-wedding-gold rounded-full animate-pulse"></span>
+        <span>02 de Mayo, 2026</span>
+      </div>
+
+      <!-- Guest Greeting -->
+      <div id="guest-greeting-container" class="mb-6 text-xl md:text-3xl font-serif italic text-wedding-cream/80 reveal hidden">
+        Hola <span id="invitado-nombre"></span>,
+      </div>
+
+      <!-- Main Title -->
+      <div class="relative w-full flex justify-center items-center">
+        <!-- SVG Floral Decor Left -->
+        <svg class="absolute -ml-[60%] md:-ml-[40%] text-wedding-gold opacity-20 w-48 h-48 md:w-64 md:h-64 pointer-events-none transform -scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+          <path d="M12 22c-4-4-4-10-4-10s2-2 4-2 4 2 4 2 0 6-4 10z" fill="currentColor" fill-opacity="0.1"/>
+          <path d="M12 22V10"/>
+          <path d="M12 16c-2-1-4-1-4-3 0-1 1-2 2-2s3 2 3.5 3"/>
+          <path d="M12 12c2-1 4-1 4-3 0-1-1-2-2-2s-3 2-3.5 3"/>
+          <!-- Little flower buds -->
+          <circle cx="9" cy="8" r="1.5" fill="currentColor"/>
+          <circle cx="15" cy="14" r="1.5" fill="currentColor"/>
+        </svg>
+
+        <h1 class="text-[10vw] md:text-[8vw] leading-[0.9] font-heading font-black tracking-tighter text-center reveal text-glitch" data-text="LILIAN & JESÚS">LILIAN & JESÚS</h1>
+
+        <!-- SVG Floral Decor Right -->
+        <svg class="absolute ml-[60%] md:ml-[40%] text-wedding-gold opacity-20 w-48 h-48 md:w-64 md:h-64 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+          <path d="M12 22c-4-4-4-10-4-10s2-2 4-2 4 2 4 2 0 6-4 10z" fill="currentColor" fill-opacity="0.1"/>
+          <path d="M12 22V10"/>
+          <path d="M12 16c-2-1-4-1-4-3 0-1 1-2 2-2s3 2 3.5 3"/>
+          <path d="M12 12c2-1 4-1 4-3 0-1-1-2-2-2s-3 2-3.5 3"/>
+          <circle cx="9" cy="8" r="1.5" fill="currentColor"/>
+          <circle cx="15" cy="14" r="1.5" fill="currentColor"/>
+        </svg>
+
+        <div class="absolute -z-20 w-[50vw] h-[50vw] bg-white/5 blur-[40px] rounded-full pointer-events-none hero-blob"></div>
+      </div>
+      
+      <!-- Elegant floral divider -->
+      <div class="flex items-center justify-center gap-4 mt-8 mb-6 reveal w-full max-w-md">
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-wedding-gold/50"></div>
+        <svg class="w-8 h-8 text-wedding-gold opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M12 22c-2-4-2-8-2-8s1-1 2-1 2 1 2 1 0 4-2 8z" fill="currentColor" fill-opacity="0.2"/>
+          <path d="M12 22V12"/>
+          <circle cx="12" cy="10" r="2" fill="currentColor"/>
+          <path d="M10 10c-1-1-2-1-2-2s1-1 1.5-0.5c1 1 1.2 2 1.5 2.5"/>
+          <path d="M14 10c1-1 2-1 2-2s-1-1-1.5-0.5c-1 1-1.2 2-1.5 2.5"/>
+        </svg>
+        <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-wedding-gold/50"></div>
+      </div>
+
+      <p class="text-base md:text-2xl font-light font-sans max-w-xl mx-auto text-white/90 leading-relaxed drop-shadow-lg px-4 reveal">
+        Nos encantaría que nos acompañaras en el inicio de nuestra mayor aventura.
+      </p>
+    </div>
+
+    <!-- ELEGANT COUNTDOWN -->
+    <div class="absolute bottom-12 md:bottom-16 left-0 w-full py-6 md:py-8 bg-[#101A14]/80 backdrop-blur-md border-y border-wedding-gold/20 z-20 overflow-hidden shadow-[0_0_30px_rgba(200,169,126,0.05)] flex justify-center items-center">
+      <div id="countdown-timer" class="flex gap-6 md:gap-16 font-heading text-center text-wedding-gold reveal">
+         <div class="flex flex-col items-center">
+            <span id="cd-dias" class="text-3xl md:text-5xl font-light">00</span>
+            <span class="text-[0.65rem] md:text-xs tracking-widest uppercase opacity-70 mt-2 font-sans">Días</span>
+         </div>
+         <div class="w-px h-12 bg-wedding-gold/20"></div>
+         <div class="flex flex-col items-center">
+            <span id="cd-horas" class="text-3xl md:text-5xl font-light">00</span>
+            <span class="text-[0.65rem] md:text-xs tracking-widest uppercase opacity-70 mt-2 font-sans">Horas</span>
+         </div>
+         <div class="w-px h-12 bg-wedding-gold/20"></div>
+         <div class="flex flex-col items-center">
+            <span id="cd-minutos" class="text-3xl md:text-5xl font-light">00</span>
+            <span class="text-[0.65rem] md:text-xs tracking-widest uppercase opacity-70 mt-2 font-sans">Minutos</span>
+         </div>
+         <div class="w-px h-12 bg-wedding-gold/20"></div>
+         <div class="flex flex-col items-center">
+            <span id="cd-segundos" class="text-3xl md:text-5xl font-light">00</span>
+            <span class="text-[0.65rem] md:text-xs tracking-widest uppercase opacity-70 mt-2 font-sans">Segundos</span>
+         </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SCHEDULE SECTION -->
+  <section id="cronograma" class="relative z-10 py-20 md:py-32">
+    <div class="max-w-[1600px] mx-auto px-4 md:px-6">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-16 px-4 reveal">
+          <h2 class="text-5xl md:text-8xl font-heading font-bold uppercase leading-[0.9] drop-shadow-lg break-words w-full md:w-auto">
+          El <br/> 
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-wedding-gold to-[#f3e5ab]">Día</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/10 bg-black/20 backdrop-blur-sm" id="schedule-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SECTION -->
+  <section id="historia" class="relative z-10 py-20 md:py-32 bg-black/20 backdrop-blur-sm border-t border-white/10 overflow-hidden">
+    <div class="absolute top-1/2 right-[-20%] w-[50vw] h-[50vw] bg-wedding-gold/10 rounded-full blur-[40px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 md:px-6 relative">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-center">
+        <div class="lg:col-span-5 lg:pr-16 order-2 lg:order-1 reveal relative z-10 pt-8 lg:pt-0">
+          <!-- Subtle background flower for text context -->
+          <svg class="absolute -top-12 -left-12 text-wedding-gold opacity-10 w-40 h-40 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+            <path d="M12 22c-8-8-8-12-8-12s3-3 8-3 8 3 8 3 0 4-8 12z"/>
+            <path d="M12 22V5"/>
+            <circle cx="12" cy="5" r="3" fill="currentColor" fill-opacity="0.2"/>
+            <circle cx="8" cy="8" r="2" fill="currentColor" fill-opacity="0.2"/>
+            <circle cx="16" cy="8" r="2" fill="currentColor" fill-opacity="0.2"/>
+          </svg>
+
+          <h2 class="text-4xl md:text-7xl font-heading font-bold mb-6 md:mb-8 leading-tight relative">
+            Nuestra <br/> <span class="text-5xl md:text-8xl text-glitch" data-text="HISTORIA">HISTORIA</span>
+          </h2>
+          <p class="text-lg md:text-xl font-sans text-gray-200 mb-8 md:mb-12 font-light leading-relaxed drop-shadow-md">
+            Nuestra historia comenzó en las montañas de Oaxaca, y hoy estamos listos para decir "Sí" frente a las personas que más queremos en el hermoso pueblo mágico de Capulálpam de Méndez.
+          </p>
+          
+          <div class="space-y-6 md:space-y-8 font-sans">
+            <div class="flex items-start gap-6">
+              <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/5">
+                <svg class="w-6 h-6 text-wedding-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <div>
+                <h4 class="text-lg md:text-xl font-bold mb-1 md:mb-2 font-heading">El Comienzo</h4>
+                <p class="text-sm text-gray-300">Nos conocimos en la universidad, entre libros y sueños.</p>
+              </div>
+            </div>
+            <!-- More Story points omitted for brevity but similar structure -->
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 lg:col-start-7 relative h-[350px] md:h-[600px] w-full lg:w-[80%] lg:ml-auto order-1 lg:order-2 reveal">
+          <div class="absolute inset-0 bg-gradient-to-br from-wedding-gold to-[#f3e5ab] rounded-3xl rotate-3 opacity-30 blur-xl"></div>
+          <div class="relative h-full w-full rounded-3xl overflow-hidden border border-white/10 group shadow-2xl">
+            <img 
+              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000&auto=format&fit=crop" 
+              alt="Pareja" 
+              class="h-full w-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 will-change-transform" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+            
+            <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-white font-sans">
+              <div class="text-5xl md:text-8xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/0 opacity-50">
+                10
+              </div>
+              <div class="text-lg md:text-xl font-bold tracking-widest uppercase mt-2">
+                Años Juntos
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION SECTION -->
+  <section id="ubicacion" class="relative z-10 py-20 md:py-32 px-4 md:px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12 md:mb-20 reveal">
+          <h2 class="text-5xl md:text-9xl font-heading font-bold opacity-20 text-white uppercase">UBICACIÓN</h2>
+          <p class="text-wedding-gold font-sans uppercase tracking-widest mt-2 md:mt-4 relative z-10 text-sm md:text-base">¿Dónde nos vemos?</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center font-sans">
+        <div class="space-y-8 order-2 lg:order-1 reveal">
+          <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md">
+            <h3 class="text-2xl font-heading font-bold mb-4 text-wedding-gold">Capulálpam de Méndez</h3>
+            <p class="text-gray-300 mb-6 leading-relaxed">
+              Pueblo Mágico en la Sierra Juárez de Oaxaca. Un lugar lleno de historia, cultura y naturaleza donde celebraremos nuestra unión.
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 text-white">
+                <div class="p-3 rounded-xl bg-wedding-gold/20 border border-wedding-gold/30">
+                  <svg class="w-5 h-5 text-wedding-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-400 uppercase tracking-widest font-bold">Dirección</p>
+                  <p class="font-medium">68760 Loma del Romero, Capulálpam de Méndez, Oax.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-white/10">
+              <a 
+                href="https://maps.google.com/?q=Capulálpam+de+Méndez+Oaxaca" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all group"
+              >
+                <span class="text-sm font-bold uppercase tracking-widest text-white">Ver en Google Maps</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative h-[400px] lg:h-[600px] rounded-3xl overflow-hidden border border-white/10 order-1 lg:order-2 reveal">
+          <div class="absolute inset-0 bg-[#1a1b3b]">
+            <img 
+              src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop" 
+              alt="Mapa" 
+              class="w-full h-full object-cover opacity-50 grayscale"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0b1e] via-transparent to-transparent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOSPEDAJE SECTION -->
+  <section id="hospedaje" class="relative z-10 py-20 md:py-32 px-4 md:px-6 bg-black/10">
+    <div class="max-w-7xl mx-auto font-sans">
+      <div class="text-center mb-12 md:mb-20 reveal">
+          <h2 class="text-5xl md:text-9xl font-heading font-bold opacity-20 text-white uppercase">HOSPEDAJE</h2>
+          <p class="text-wedding-gold font-sans uppercase tracking-widest mt-2 md:mt-4 relative z-10 text-sm md:text-base">¿Dónde hospedarte?</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal">
+        <div class="relative h-[400px] rounded-3xl overflow-hidden border border-white/10">
+          <img 
+            src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop" 
+            alt="Cabañas Capulálpam" 
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md text-white">
+          <h3 class="text-2xl font-heading font-bold mb-4 text-wedding-gold">Cabañas Capulálpam</h3>
+          <p class="text-gray-300 mb-6 leading-relaxed">
+            Te recomendamos hospedarte el día de la boda en las cabañas del lugar de la fiesta para evitar traslados y disfrutes al máximo del evento.
+          </p>
+          <div class="space-y-4 mb-8">
+            <p class="font-medium">Ubicación: En el lugar de la boda.</p>
+            <p class="font-medium">WhatsApp: 951 532 5092</p>
+          </div>
+          <a 
+            href="https://wa.me/529515325092" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-block px-8 py-4 bg-wedding-gold text-black font-bold uppercase tracking-widest rounded-xl hover:bg-[#f3e5ab] transition-colors"
+          >
+            Reservar Cabañas
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGALOS SECTION -->
+  <section id="regalos" class="relative z-10 py-20 md:py-32 px-4 md:px-6">
+    <div class="max-w-4xl mx-auto text-center font-sans">
+      <div class="mb-12 md:mb-20 reveal">
+          <h2 class="text-5xl md:text-9xl font-heading font-bold opacity-20 text-white uppercase">REGALOS</h2>
+          <p class="text-wedding-gold font-mono uppercase tracking-widest mt-2 md:mt-4 relative z-10 text-sm md:text-base">Mesa de Regalos</p>
+      </div>
+      
+      <div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-md reveal">
+        <h3 class="text-2xl font-heading font-bold mb-6 text-white text-center">Nuestro mayor regalo es contar con su compañía.</h3>
+        <p class="text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto text-center">
+          Sin embargo, si desean hacernos algún obsequio, agradeceríamos lo hicieran en efectivo mediante transferencia bancaria.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left text-white" id="gift-section-content" style="display: none;">
+          <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">Banco</p>
+            <p class="text-xl font-bold">BANAMEX</p>
+          </div>
+          <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">Titular</p>
+            <p class="text-xl font-bold">Manuel de Jesús Castillo Elizalde</p>
+          </div>
+          <div class="p-6 bg-white/5 rounded-2xl border border-white/10 md:col-span-2">
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">No. Tarjeta</p>
+            <p class="text-xl font-bold tracking-wider" id="gift-card">XXXX XXXX XXXX XXXX</p>
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mt-4 mb-2">CLABE</p>
+            <p class="text-xl font-bold tracking-wider" id="gift-clabe">XXXXXXXXXXXXXXXXXX</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP SECTION -->
+  <section id="rsvp" class="relative z-10 py-20 md:py-32 px-4 md:px-6 bg-black/30 backdrop-blur-lg font-sans">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12 md:mb-20 reveal">
+          <h2 class="text-5xl md:text-9xl font-heading font-bold opacity-20 text-white">RSVP</h2>
+          <p class="text-wedding-gold uppercase tracking-widest mt-2 md:mt-4 relative z-10 text-sm md:text-base">Confirma tu asistencia</p>
+      </div>
+      
+      <div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-md text-white reveal relative overflow-hidden" id="rsvp-container">
+          <!-- Floating flower top right -->
+          <svg class="absolute -top-8 -right-8 text-wedding-gold opacity-10 w-32 h-32 pointer-events-none rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+            <path d="M12 22c-4-4-4-10-4-10s2-2 4-2 4 2 4 2 0 6-4 10z"/>
+            <circle cx="12" cy="7" r="2" fill="currentColor" fill-opacity="0.3"/>
+            <circle cx="8" cy="11" r="2" fill="currentColor" fill-opacity="0.3"/>
+            <circle cx="16" cy="11" r="2" fill="currentColor" fill-opacity="0.3"/>
+          </svg>
+
+          <p class="text-center text-gray-300 mb-8 font-serif italic text-2xl relative">Por favor, indícanos si podrás acompañarnos:</p>
+          <div class="flex flex-col sm:flex-row gap-6 justify-center" id="rsvp-buttons">
+            <button id="btn-si" class="py-4 px-8 bg-wedding-gold text-black font-bold uppercase tracking-widest rounded-xl hover:bg-[#f3e5ab] transition-colors w-full sm:w-auto">Sí, asistiré</button>
+            <button id="btn-no" class="py-4 px-8 bg-transparent border border-wedding-gold text-wedding-gold font-bold uppercase tracking-widest rounded-xl hover:bg-wedding-gold/10 transition-colors w-full sm:w-auto">No podré asistir</button>
+          </div>
+          <p id="rsvp-estado" class="text-center mt-6 text-wedding-gold font-bold h-6 transition-opacity"></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="relative z-10 border-t border-white/10 py-12 md:py-16 bg-black/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="text-center md:text-left">
+          <div class="font-heading text-3xl md:text-4xl font-bold tracking-tighter mb-2 text-white">L & J</div>
+          <p class="text-xs font-sans text-gray-400 uppercase tracking-widest">02.05.2026 • OAXACA</p>
+      </div>
+      
+      <div class="flex gap-6 md:gap-8 items-center text-white">
+        <p class="text-gray-400 text-xs uppercase tracking-widest">Hecho con amor para nuestra familia y amigos</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Template -->
+  <div id="event-modal" class="fixed inset-0 z-[60] flex overflow-y-auto p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+    <div class="relative w-full max-w-5xl m-auto bg-[#1a1b3b] border border-white/10 overflow-hidden flex flex-col md:flex-row shadow-2xl shadow-[#d4af37]/10 scale-95 transition-transform duration-300 text-white" id="event-modal-content">
+      <button onclick="closeModal()" class="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 text-white hover:bg-white hover:text-black transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <div class="w-full md:w-5/12 min-h-[300px] md:h-auto relative shrink-0">
+        <img id="modal-img" src="" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1a1b3b] via-transparent to-transparent md:bg-gradient-to-r"></div>
+      </div>
+      <div class="w-full md:w-7/12 p-8 md:p-14 flex flex-col justify-center relative font-sans">
+        <div class="flex items-center gap-3 text-wedding-gold mb-4">
+            <span class="font-bold text-sm tracking-widest uppercase" id="modal-time"></span>
+        </div>
+        <h3 id="modal-title" class="text-4xl md:text-6xl font-heading font-bold uppercase leading-none mb-2 text-white"></h3>
+        <div class="flex items-center gap-2 text-[#f3e5ab] font-medium tracking-widest uppercase mb-6" id="modal-location"></div>
+        <div class="h-px w-20 bg-white/20 mb-6"></div>
+        <p id="modal-desc" class="text-gray-300 leading-relaxed text-lg font-light mb-8"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
