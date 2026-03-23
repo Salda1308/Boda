@@ -15,11 +15,12 @@ let invitadoActual = {
 };
 
 const SCHEDULE = [
-  { id: '1', title: 'Ceremonia Religiosa', time: '12:00 PM', location: 'Templo de San Mateo', image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop', description: 'Acompáñanos en este momento sagrado en el Templo de San Mateo, Capulálpam de Méndez.' },
-  { id: '2', title: 'Calenda', time: '01:30 PM', location: 'Calles de Capulálpam', image: 'https://images.unsplash.com/photo-1530103043960-ef38714abb15?q=80&w=1000&auto=format&fit=crop', description: 'Partiremos del templo terminada la misa camino al lugar de la fiesta. ¡Música y alegría por las calles!' },
+  { id: '1', title: 'Ceremonia Religiosa', time: '12:00 PM', location: 'Templo de San Mateo', image: 'IMG/CeremoniaReligiosa.jpeg', description: 'Acompáñanos en este momento sagrado en el Templo de San Mateo, Capulálpam de Méndez.' },
+  { id: '2', title: 'Calenda', time: '01:30 PM', location: 'Calles de Capulálpam', image: 'IMG/Calenda.jpeg', description: 'Partiremos del templo terminada la misa camino al lugar de la fiesta. ¡Música y alegría por las calles!' },
   { id: '3', title: 'Recepción', time: '02:00 PM', location: 'Cabañas Capulálpam', image: 'https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=1000&auto=format&fit=crop', description: 'Brindemos por el amor en las hermosas Cabañas Capulálpam.' },
   { id: '4', title: 'Fiesta', time: '03:00 PM', location: 'Cabañas de Capulálpam', image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000&auto=format&fit=crop', description: 'Espacio al aire libre. Música, baile y celebración inolvidable.' },
 ];
+
 
 let currentIndex = 0;
 

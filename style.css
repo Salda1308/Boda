@@ -23,7 +23,7 @@ body {
     left: 0;
     width: 24px;
     height: 24px;
-    background-color: #C8A97E;
+    background-color: #6a5e46;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
@@ -36,7 +36,7 @@ body {
     width: 48px;
     height: 48px;
     background-color: transparent;
-    border: 2px solid #C8A97E;
+    border: 2px solid #6a5e46;
 }
 
 /* Fluid Background Replication */
@@ -44,8 +44,8 @@ body {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: radial-gradient(circle at 10% 20%, rgba(46, 79, 59, 0.45) 0%, transparent 45%),
-                radial-gradient(circle at 90% 80%, rgba(200, 169, 126, 0.15) 0%, transparent 45%);
+    background: radial-gradient(circle at 10% 20%, rgba(62, 81, 60, 0.45) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(106, 94, 70, 0.15) 0%, transparent 45%);
     pointer-events: none;
 }
 
@@ -75,7 +75,7 @@ body {
 }
 .text-glitch::before {
     left: 2px;
-    text-shadow: -2px 0 #C8A97E;
+    text-shadow: -2px 0 #6a5e46;
     clip: rect(24px, 550px, 90px, 0);
     animation: glitch-anim-2 3s infinite linear alternate-reverse;
 }
