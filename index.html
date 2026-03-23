@@ -40,7 +40,7 @@
 
   <!-- Navigation -->
   <nav class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 md:px-8 py-6 mix-blend-difference">
-    <div class="cursor-default z-50 flex items-center"><img src="IMG/Logo.PNG" alt="L & J" class="h-12 md:h-14 w-auto object-contain" /></div>
+    <div class="cursor-default z-50 flex items-center"><img src="IMG/Logo.PNG" alt="L & J" class="h-16 md:h-20 w-auto object-contain" /></div>
     
     <!-- Desktop Menu -->
     <div class="hidden md:flex gap-10 text-sm font-bold tracking-widest uppercase">
@@ -48,6 +48,7 @@
       <button onclick="scrollToSection('cronograma')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Cronograma</button>
       <button onclick="scrollToSection('ubicacion')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Ubicación</button>
       <button onclick="scrollToSection('hospedaje')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Hospedaje</button>
+      <button onclick="scrollToSection('dresscode')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Dresscode</button>
       <button onclick="scrollToSection('regalos')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">Regalos</button>
       <button onclick="scrollToSection('rsvp')" class="hover:text-wedding-gold transition-colors text-white cursor-pointer bg-transparent border-none">RSVP</button>
     </div>
@@ -68,6 +69,7 @@
     <button onclick="scrollToSection('cronograma')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Cronograma</button>
     <button onclick="scrollToSection('ubicacion')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Ubicación</button>
     <button onclick="scrollToSection('hospedaje')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Hospedaje</button>
+    <button onclick="scrollToSection('dresscode')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Dresscode</button>
     <button onclick="scrollToSection('regalos')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">Regalos</button>
     <button onclick="scrollToSection('rsvp')" class="text-3xl font-heading font-bold text-white hover:text-wedding-gold transition-colors uppercase bg-transparent border-none">RSVP</button>
     <button onclick="scrollToSection('rsvp')" class="mt-8 border border-white px-10 py-4 text-sm font-bold tracking-widest uppercase bg-white text-black">
@@ -198,9 +200,13 @@
           <h2 class="text-4xl md:text-7xl font-heading font-bold mb-6 md:mb-8 leading-tight relative">
             Nuestra <br/> <span class="text-5xl md:text-8xl text-glitch" data-text="HISTORIA">HISTORIA</span>
           </h2>
-          <p class="text-lg md:text-xl font-sans text-gray-200 mb-8 md:mb-12 font-light leading-relaxed drop-shadow-md">
-            Nuestra historia comenzó en las montañas de Oaxaca, y hoy estamos listos para decir "Sí" frente a las personas que más queremos en el hermoso pueblo mágico de Capulálpam de Méndez.
-          </p>
+          <div class="mb-8 md:mb-12">
+            <p class="text-2xl md:text-3xl font-serif italic text-wedding-cream mb-4 leading-snug">Dije que sí…</p>
+            <blockquote class="border-l-2 border-wedding-gold pl-6 text-lg md:text-xl font-serif italic text-gray-200 leading-relaxed drop-shadow-md">
+              &ldquo;Te quiero no por quien eres, sino por quien soy cuando estoy contigo&rdquo;
+            </blockquote>
+            <p class="mt-3 text-sm text-wedding-gold font-sans tracking-widest">— Gabriel García Márquez</p>
+          </div>
           
           <div class="space-y-6 md:space-y-8 font-sans">
             <div class="flex items-start gap-6">
@@ -286,7 +292,7 @@
             <img 
               src="IMG/Ubicacion.jpeg" 
               alt="Ubicación" 
-              class="w-full h-full object-cover opacity-70"
+              class="w-full h-full object-cover object-[center_70%] opacity-70"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-[#1e2b1d] via-transparent to-transparent"></div>
           </div>
@@ -333,6 +339,58 @@
     </div>
   </section>
 
+  <!-- DRESSCODE SECTION -->
+  <section id="dresscode" class="relative z-10 py-20 md:py-32 px-4 md:px-6 bg-black/10">
+    <div class="max-w-4xl mx-auto font-sans">
+      <div class="text-center mb-12 md:mb-20 reveal">
+        <h2 class="text-5xl md:text-9xl font-heading font-bold opacity-20 text-white uppercase">DRESSCODE</h2>
+        <p class="text-wedding-gold font-sans uppercase tracking-widest mt-2 md:mt-4 relative z-10 text-sm md:text-base">¿Cómo vestirse?</p>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-md reveal">
+        <p class="text-center text-2xl md:text-3xl font-serif italic text-wedding-cream mb-8">¡Prepárense para una boda llena de colores!</p>
+
+        <div class="flex flex-wrap justify-center gap-4 mb-10">
+          <div class="flex items-center gap-3 px-5 py-3 rounded-full border border-white/30 bg-white/10">
+            <span class="w-4 h-4 rounded-full bg-white inline-block flex-shrink-0 border border-white/50"></span>
+            <span class="text-sm font-bold uppercase tracking-widest text-white">Blanco &mdash; Solo la novia</span>
+          </div>
+          <div class="flex items-center gap-3 px-5 py-3 rounded-full border border-wedding-gold/40 bg-wedding-gold/10">
+            <span class="w-4 h-4 rounded-full inline-block flex-shrink-0" style="background-color:#6b7c4b;"></span>
+            <span class="text-sm font-bold uppercase tracking-widest text-wedding-cream">Verde Olivo &mdash; Damas de honor</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="p-4 rounded-2xl bg-wedding-gold/20 border border-wedding-gold/30">
+                <svg class="w-7 h-7 text-wedding-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              </div>
+              <h3 class="text-2xl font-heading font-bold text-wedding-gold">Hombres</h3>
+            </div>
+            <ul class="space-y-3 text-gray-200">
+              <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-wedding-gold flex-shrink-0"></span>Traje sin corbata</li>
+              <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-wedding-gold flex-shrink-0"></span>Ropa típica (guayabera)</li>
+            </ul>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="p-4 rounded-2xl bg-wedding-gold/20 border border-wedding-gold/30">
+                <svg class="w-7 h-7 text-wedding-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              </div>
+              <h3 class="text-2xl font-heading font-bold text-wedding-gold">Mujeres</h3>
+            </div>
+            <ul class="space-y-3 text-gray-200">
+              <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-wedding-gold flex-shrink-0"></span>Vestido</li>
+              <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-wedding-gold flex-shrink-0"></span>Ropa típica</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- REGALOS SECTION -->
   <section id="regalos" class="relative z-10 py-20 md:py-32 px-4 md:px-6">
     <div class="max-w-4xl mx-auto text-center font-sans">
@@ -342,25 +400,34 @@
       </div>
       
       <div class="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-md reveal">
-        <h3 class="text-2xl font-heading font-bold mb-6 text-white text-center">Nuestro mayor regalo es contar con su compañía.</h3>
-        <p class="text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto text-center">
-          Sin embargo, si desean hacernos algún obsequio, agradeceríamos lo hicieran en efectivo mediante transferencia bancaria.
+        <h3 class="text-2xl font-heading font-bold mb-4 text-white text-center">Nuestro mayor regalo es contar con su compañía.</h3>
+        <p class="text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto text-center">
+          Sin embargo, si desean hacernos algún obsequio, agradeceríamos lo hicieran a través de:
         </p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left text-white" id="gift-section-content" style="display: none;">
-          <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
-            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">Banco</p>
-            <p class="text-xl font-bold">BANAMEX</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
+          <div class="p-6 bg-white/5 rounded-2xl border border-white/10 flex flex-col items-center text-center gap-3">
+            <span class="text-5xl">✉️</span>
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold">Opción</p>
+            <p class="text-xl font-bold">A través de efectivo</p>
           </div>
-          <div class="p-6 bg-white/5 rounded-2xl border border-white/10">
-            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">Titular</p>
-            <p class="text-xl font-bold">Manuel de Jesús Castillo Elizalde</p>
+          <div class="p-6 bg-white/5 rounded-2xl border border-white/10 flex flex-col items-center text-center gap-3">
+            <span class="text-5xl">💳</span>
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold">Banco</p>
+            <p class="text-xl font-bold">Banamex</p>
+            <p class="text-sm text-gray-300 leading-relaxed">Manuel de Jesús Castillo Elizalde</p>
           </div>
           <div class="p-6 bg-white/5 rounded-2xl border border-white/10 md:col-span-2">
-            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">No. Tarjeta</p>
-            <p class="text-xl font-bold tracking-wider" id="gift-card">XXXX XXXX XXXX XXXX</p>
-            <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mt-4 mb-2">CLABE</p>
-            <p class="text-xl font-bold tracking-wider" id="gift-clabe">XXXXXXXXXXXXXXXXXX</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="text-center">
+                <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">CLABE</p>
+                <p class="text-lg font-bold tracking-wider" id="gift-clabe">002180702215240295</p>
+              </div>
+              <div class="text-center">
+                <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">No. Tarjeta</p>
+                <p class="text-lg font-bold tracking-wider" id="gift-card">5204 1662 4221 2597</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -397,7 +464,7 @@
   <footer class="relative z-10 border-t border-white/10 py-12 md:py-16 bg-black/80 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="text-center md:text-left flex flex-col items-center md:items-start">
-          <img src="IMG/Logo.PNG" alt="L & J" class="h-14 md:h-16 w-auto object-contain mb-1" />
+          <img src="IMG/Logo.PNG" alt="L & J" class="h-20 md:h-24 w-auto object-contain mb-1" />
           <p class="text-xs font-sans text-gray-400 uppercase tracking-widest">02.05.2026 • OAXACA</p>
       </div>
       

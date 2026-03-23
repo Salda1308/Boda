@@ -55,12 +55,23 @@ function doPost(e) {
       payload.fuente || ''
     ];
 
-    // Buscar si ya existe una fila con el mismo invitadoId (columna B = índice 1)
+    // Buscar si ya existe una fila con el mismo invitadoId (columna B) o nombre (columna C)
     var data = sheet.getDataRange().getValues();
     var foundRow = -1;
     for (var i = 1; i < data.length; i++) {
-      if (String(data[i][1]) === String(invitadoId)) {
-        foundRow = i + 1; // getRange es 1-indexed
+      var rowId = String(data[i][1]);
+      var rowNombre = String(data[i][2]).toLowerCase().trim();
+      var currentId = String(invitadoId);
+      var currentNombre = String(payload.nombre || '').toLowerCase().trim();
+
+      // Si tenemos un ID real (no general), buscamos por ID
+      if (currentId !== 'general' && rowId === currentId) {
+        foundRow = i + 1;
+        break;
+      } 
+      // Si somos 'general', intentamos buscar por nombre exacto
+      else if (currentId === 'general' && rowNombre === currentNombre && currentNombre !== '') {
+        foundRow = i + 1;
         break;
       }
     }

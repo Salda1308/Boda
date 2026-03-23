@@ -89,12 +89,45 @@ function inicializarRSVP() {
     const btnNo = document.getElementById('btn-no');
     if(!btnSi || !btnNo) return;
     
-    const previo = obtenerConfirmacionesLocales().find((item) => item.invitadoId === invitadoActual.id);
-    if (previo) {
-        actualizarEstadoRSVP(`Ya registramos tu respuesta: ${previo.estado.toUpperCase()}. Gracias.`);
+    const previoLocal = obtenerConfirmacionesLocales().find((item) => item.invitadoId === invitadoActual.id);
+    
+    // Función para bloquear botones
+    const bloquearBotones = (status) => {
+        actualizarEstadoRSVP(`Ya registramos tu respuesta: ${status.toUpperCase().replace('_', ' ')}. Gracias.`);
         btnSi.disabled = true; btnNo.disabled = true;
         btnSi.style.opacity = '0.5'; btnNo.style.opacity = '0.5';
-        return;
+    };
+
+    if (previoLocal) {
+        bloquearBotones(previoLocal.estado);
+    }
+
+    // Sincronizar con el servidor para evitar duplicados si se cambió de dispositivo/caché
+    const config = obtenerConfig();
+    if (config.rsvpEndpoint) {
+        fetch(config.rsvpEndpoint)
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    const currentId = String(invitadoActual.id);
+                    const currentNombre = String(invitadoActual.nombre || '').toLowerCase().trim();
+                    
+                    const matchesServer = data.find(item => {
+                        const rowId = String(item.invitadoId);
+                        const rowNombre = String(item.nombre || '').toLowerCase().trim();
+                        // Mismo ID o mismo nombre (si somos general)
+                        if (currentId !== 'general' && rowId === currentId) return true;
+                        if (currentId === 'general' && rowNombre === currentNombre && currentNombre !== '') return true;
+                        return false;
+                    });
+
+                    if (matchesServer) {
+                        guardarConfirmacionLocal(matchesServer);
+                        bloquearBotones(matchesServer.estado);
+                    }
+                }
+            })
+            .catch(err => console.error("Error sincronizando con servidor:", err));
     }
 
     const manejarClick = async (estado) => {
