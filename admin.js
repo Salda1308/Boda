@@ -87,7 +87,12 @@ function renderInvitados() {
 
   guestListEl.innerHTML = invitados.map((inv) => {
     const link = crearLinkPerfil(inv);
-    const fullLink = window.location.origin + window.location.pathname.replace('admin.html', '') + link;
+    let basePath = window.location.pathname;
+    basePath = basePath.replace(/\/admin(\.html)?\/?$/, '/');
+    if (!basePath.endsWith('/')) {
+        basePath += '/';
+    }
+    const fullLink = window.location.origin + basePath + link;
     
     // Evaluar estado RSVP convirtiendo ambos a string para evitar errores por tipos de datos
     const rsvp = confirmaciones.find(c => String(c.invitadoId) === String(inv.id));
@@ -109,7 +114,6 @@ function renderInvitados() {
         <small>ID: ${inv.id} | ${inv.tipo} | ${inv.pases} pase(s)</small>
         <div class="item-actions">
           <a href="${link}" target="_blank" rel="noopener noreferrer">Ver</a>
-          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent('¡Hola ' + inv.nombre + '! Nos casamos y nos encantaría que nos acompañaras. Puedes ver tu invitación y confirmar asistencia aquí: ' + fullLink)}" target="_blank" style="border-color:#25D366; color:#25D366;">WhatsApp</a>
           <button data-copy="${fullLink}">Copiar Link</button>
           <button data-delete="${inv.id}">Eliminar</button>
         </div>
