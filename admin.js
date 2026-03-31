@@ -7,6 +7,15 @@ const statusEl = document.getElementById('form-status');
 const guestListEl = document.getElementById('guest-list');
 const btnExport = document.getElementById('btn-export');
 
+function generarId() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let id = '';
+  for (let i = 0; i < 4; i++) {
+    id += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return id;
+}
+
 function leerJSONSeguro(clave) {
   try {
     return JSON.parse(localStorage.getItem(clave) || '[]');
@@ -100,7 +109,8 @@ function renderInvitados() {
         <small>ID: ${inv.id} | ${inv.tipo} | ${inv.pases} pase(s)</small>
         <div class="item-actions">
           <a href="${link}" target="_blank" rel="noopener noreferrer">Ver</a>
-          <button data-copy="${fullLink}">Copiar WhatsApp</button>
+          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent('¡Hola ' + inv.nombre + '! Nos casamos y nos encantaría que nos acompañaras. Puedes ver tu invitación y confirmar asistencia aquí: ' + fullLink)}" target="_blank" style="border-color:#25D366; color:#25D366;">WhatsApp</a>
+          <button data-copy="${fullLink}">Copiar Link</button>
           <button data-delete="${inv.id}">Eliminar</button>
         </div>
       </article>
@@ -148,6 +158,7 @@ form.addEventListener('submit', (event) => {
   guardarInvitados(invitados);
   form.reset();
   document.getElementById('guest-pases').value = '1';
+  document.getElementById('guest-id').value = generarId();
   statusEl.innerText = 'Perfil creado exitosamente.';
   statusEl.style.color = 'var(--accent)';
   renderInvitados();
@@ -157,6 +168,8 @@ form.addEventListener('submit', (event) => {
 
 // Inicializar y renderizar (sincronizando backend si existe)
 async function inicializarAdmin() {
+  const guestIdInput = document.getElementById('guest-id');
+  if (guestIdInput) guestIdInput.value = generarId();
   await cargarConfirmacionesRemotas();
   renderInvitados();
 }
